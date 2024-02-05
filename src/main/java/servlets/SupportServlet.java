@@ -9,10 +9,11 @@ import util.DataStore;
 import java.io.IOException;
 
 public class SupportServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/plain");
-        resp.getWriter().write(DataStore.getRandomSupportPhrase());
+        resp.getWriter().write(DataStore.getInstance().getRandomSupportPhrase());
     }
 
 
@@ -20,7 +21,7 @@ public class SupportServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String newSupportPhrase = req.getReader().readLine();
         if ("text/plain".equals(req.getContentType())) {
-            DataStore.addSupportPhrase(newSupportPhrase);
+            DataStore.getInstance().addSupportPhrase(newSupportPhrase);
         } else if (req.getContentType() == null || newSupportPhrase == null || newSupportPhrase.isBlank()) {
             resp.sendError(HttpServletResponse.SC_LENGTH_REQUIRED);
         } else {

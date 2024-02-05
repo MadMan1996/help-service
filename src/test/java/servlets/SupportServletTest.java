@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
+import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import util.DataStore;
 
@@ -16,12 +17,12 @@ import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
 import java.io.StringReader;
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
@@ -35,6 +36,8 @@ class SupportServletTest {
     private HttpServletResponse resp;
     @Mock
     private HttpServletRequest req;
+    @Mock
+    private DataStore dataStore;
 
     @BeforeEach
     public void init() {
@@ -45,13 +48,18 @@ class SupportServletTest {
     public void doGetTest() throws ServletException, IOException {
         StringWriter respStringWriter = new StringWriter();
         PrintWriter respWriter = new PrintWriter(respStringWriter);
+        String supportPhrase = "Test phrase";
 
-        when(resp.getWriter()).thenReturn(respWriter);
+        try(MockedStatic<DataStore> mockedDataStore = mockStatic(DataStore.class)){
+            mockedDataStore.when(DataStore::getInstance).thenReturn(dataStore);
+            when(dataStore.getRandomSupportPhrase()).thenReturn(supportPhrase);
+            when(resp.getWriter()).thenReturn(respWriter);
 
-        supportServlet.doGet(req, resp);
+            supportServlet.doGet(req, resp);
 
-        verify(resp, times(1)).getWriter();
-        assertTrue(DataStore.getSupportPhrases().contains(respStringWriter.toString()));
+            verify(resp, times(1)).getWriter();
+            assertEquals(supportPhrase, respStringWriter.toString());
+        }
     }
 
     @Test
@@ -62,11 +70,11 @@ class SupportServletTest {
         when(req.getContentType()).thenReturn("text/plain");
         when(req.getReader()).thenReturn(reqReader);
 
-        Set<String> beforePost = new HashSet<>(DataStore.getSupportPhrases());
+        Set<String> beforePost = DataStore.getInstance().getSupportPhrases();
 
         supportServlet.doPost(req, resp);
 
-        Set<String> afterPost = new HashSet<>(DataStore.getSupportPhrases());
+        Set<String> afterPost = DataStore.getInstance().getSupportPhrases();
         afterPost.removeAll(beforePost);
 
         verify(req, times(1)).getReader();

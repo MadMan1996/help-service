@@ -1,4 +1,4 @@
-package repository;
+package org.example.repository;
 
 public interface SupportPhraseRepository {
     String getRandom();

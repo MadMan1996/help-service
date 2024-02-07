@@ -1,6 +1,6 @@
-package repository.impl;
+package org.example.repository.impl;
 
-import repository.SupportPhraseRepository;
+import org.example.repository.SupportPhraseRepository;
 
 import java.util.Map;
 import java.util.Random;

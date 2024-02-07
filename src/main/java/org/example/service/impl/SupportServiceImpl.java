@@ -1,7 +1,7 @@
-package service.impl;
+package org.example.service.impl;
 
-import repository.SupportPhraseRepository;
-import service.SupportService;
+import org.example.repository.SupportPhraseRepository;
+import org.example.service.SupportService;
 
 public class SupportServiceImpl implements SupportService {
 

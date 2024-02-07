@@ -4,7 +4,7 @@
          version="4.0">
     <servlet>
         <servlet-name>Support</servlet-name>
-        <servlet-class>servlets.SupportServlet</servlet-class>
+        <servlet-class>org.example.servlets.SupportServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Support</servlet-name>

@@ -1,7 +1,6 @@
 package org.example;
 
 import org.example.annotation.Configuration;
-import org.example.service.SupportService;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
@@ -12,11 +11,6 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class ApplicationContext {
-    public static void main(String[] args) {
-        ApplicationContext context = new ApplicationContext();
-        context.getInstance(SupportService.class);
-    }
-
     private final Reflections reflection;
     private final Map<Class<?>, Object> INSTANCE_BY_CLASS;
 

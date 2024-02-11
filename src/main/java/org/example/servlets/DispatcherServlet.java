@@ -14,7 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 public class DispatcherServlet extends HttpServlet {
     private HandlerMapping handlerMapping;
     @Override
-    public void init() throws ServletException {
+    public void init() {
         ApplicationContext context = new ApplicationContext();
         this.handlerMapping = context.getInstance(HandlerMapping.class);
     }

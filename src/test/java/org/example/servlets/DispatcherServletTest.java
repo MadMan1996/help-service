@@ -34,7 +34,7 @@ class DispatcherServletTest {
 
 
     @Test
-    public void init_should_inject_hadnlerMapping() throws ServletException {
+    public void init_should_inject_hadnlerMapping() {
         dispatcherServlet.setHandlerMapping(null);
 
         dispatcherServlet.init();

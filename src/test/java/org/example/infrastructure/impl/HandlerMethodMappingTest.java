@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -35,7 +34,7 @@ class HandlerMethodMappingTest {
     private HandlerMethod handlerMethod;
 
     @Test
-    public void invokeHandler_should_invoke_handlerMethod_when_it_is_present() throws InvocationTargetException, IllegalAccessException, IOException, HandlerNotFoundException {
+    public void invokeHandler_should_invoke_handlerMethod_when_it_is_present() throws InvocationTargetException, IllegalAccessException, HandlerNotFoundException {
         when(request.getContextPath()).thenReturn("/help-service");
         when(request.getPathInfo()).thenReturn("/v1/support");
         when(request.getMethod()).thenReturn("GET");
@@ -47,7 +46,7 @@ class HandlerMethodMappingTest {
     }
 
     @Test
-    public void invokeHandler_should_throw_HandlerNotFoundExcetption_when_there_is_no_handler() throws InvocationTargetException, IllegalAccessException, HandlerNotFoundException {
+    public void invokeHandler_should_throw_HandlerNotFoundExcetption_when_there_is_no_handler() throws HandlerNotFoundException {
         when(request.getContextPath()).thenReturn("/help-service");
         when(request.getPathInfo()).thenReturn("/v1/support");
         when(request.getMethod()).thenReturn("GET");

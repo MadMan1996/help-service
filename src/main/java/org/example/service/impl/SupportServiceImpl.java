@@ -1,5 +1,6 @@
 package org.example.service.impl;
 
+import org.example.entity.SupportPhrase;
 import org.example.repository.SupportPhraseRepository;
 import org.example.service.SupportService;
 
@@ -11,11 +12,11 @@ public class SupportServiceImpl implements SupportService {
         this.supportPhraseRepository = repository;
     }
     @Override
-    public String getSupportPhrase(){
+    public SupportPhrase getSupportPhrase(){
         return supportPhraseRepository.getRandom();
     }
     @Override
-    public void addSupportPhrase(String phrase){
+    public void addSupportPhrase(SupportPhrase phrase){
         supportPhraseRepository.add(phrase);
     }
 

@@ -1,6 +1,8 @@
 package org.example.repository;
 
+import org.example.entity.SupportPhrase;
+
 public interface SupportPhraseRepository {
-    String getRandom();
-    void add(String supportPhrase);
+    SupportPhrase getRandom();
+    void add(SupportPhrase supportPhrase);
 }

@@ -1,7 +1,8 @@
 package org.example.service;
 
-public interface SupportService {
-    String getSupportPhrase();
+import org.example.entity.SupportPhrase;
 
-    void addSupportPhrase(String phrase);
+public interface SupportService {
+    SupportPhrase getSupportPhrase();
+    void addSupportPhrase(SupportPhrase phrase);
 }

@@ -1,5 +1,6 @@
 package org.example.repository.impl;
 
+import org.example.entity.SupportPhrase;
 import org.example.repository.SupportPhraseRepository;
 
 import java.util.Map;
@@ -10,24 +11,24 @@ public class SupportPhrasePhraseRepositoryImpl implements SupportPhraseRepositor
 
     private final Object stub;
 
-    private final Map<String, Object> supportPhrases;
+    private final Map<SupportPhrase, Object> supportPhrases;
 
     public SupportPhrasePhraseRepositoryImpl() {
         this.stub = new Object();
         this.supportPhrases = new ConcurrentHashMap<>();
 
-        supportPhrases.put("У тебя все получится!", stub);
-        supportPhrases.put("Еще чуть-чуть", stub);
-        supportPhrases.put("Сегодня ты на высоте ;)", stub);
+        supportPhrases.put(new SupportPhrase("У тебя все получится!"), stub);
+        supportPhrases.put(new SupportPhrase("Еще чуть-чуть"), stub);
+        supportPhrases.put(new SupportPhrase("Сегодня ты на высоте ;)"), stub);
     }
 
     @Override
-    public String getRandom() {
+    public SupportPhrase getRandom() {
         int randomIndex = new Random().nextInt(supportPhrases.size());
-        return supportPhrases.keySet().stream().skip(randomIndex).findFirst().orElse("Помощь всегда рядом!");
+        return supportPhrases.keySet().stream().skip(randomIndex).findFirst().orElse(new SupportPhrase("Сегодня ты на высоте ;)"));
     }
     @Override
-    public void add(String phrase) {
+    public void add(SupportPhrase phrase) {
         supportPhrases.put(phrase, stub);
     }
 

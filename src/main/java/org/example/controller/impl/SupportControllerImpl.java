@@ -23,12 +23,14 @@ public class SupportControllerImpl implements SupportController {
 
     @Override
     public void getSupport(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        res.setContentType("application/json");
         SupportPhraseDto supportPhraseDto = objectMapper.convertValue(supportService.getSupportPhrase(), SupportPhraseDto.class);
         res.getWriter().write(objectMapper.writeValueAsString(supportPhraseDto));
     }
 
     @Override
     public void addSupport(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        res.setContentType("application/json");
         SupportPhraseDto newPhraseDto = objectMapper.readValue(req.getReader().lines().reduce("", String::concat), SupportPhraseDto.class);
         supportService.addSupportPhrase(objectMapper.convertValue(newPhraseDto, SupportPhrase.class));
     }

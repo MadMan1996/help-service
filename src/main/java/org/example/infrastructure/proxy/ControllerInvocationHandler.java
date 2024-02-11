@@ -8,7 +8,7 @@ import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class ControllerInvocationHandler implements InvocationHandler {
-    private Object instance;
+    private final Object instance;
 
     public ControllerInvocationHandler(Object instance) {
         this.instance = instance;

@@ -8,8 +8,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class ControllerMethod implements HandlerMethod {
-    private Object controller;
-    private Method method;
+    private final Object controller;
+    private final Method method;
 
     public ControllerMethod(Object controller, Method method) {
         this.controller = controller;

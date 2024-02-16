@@ -6,6 +6,7 @@
   <packaging>pom</packaging>
     <modules>
         <module>simple-app-context</module>
+        <module>spring-implementation</module>
     </modules>
     <properties>
     <maven.compiler.source>17</maven.compiler.source>

@@ -11,6 +11,7 @@ import org.example.impl.InMemoryMessageSource;
 import org.example.impl.InMemorySourceListenerContainer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 @Configuration
 public class AppConfig {
@@ -29,7 +30,8 @@ public class AppConfig {
         return new InMemorySourceListenerContainer();
     }
 
-    @Bean()
+    @Bean
+    @DependsOn("supportPhraseListener")
     public EventBroker eventBroker(EventSource eventSource, ListenerContainer listenerContainer) {
         return new InMemoryEventBroker(eventSource, listenerContainer);
     }

@@ -24,13 +24,13 @@ public class SupportController {
     }
 
     @GetMapping("/support")
-    public ResponseEntity<SupportPhraseDto> getSupport() throws IOException {
+    public ResponseEntity<SupportPhraseDto> getSupport() {
         SupportPhraseDto supportPhraseDto = objectMapper.convertValue(supportService.getSupportPhrase(), SupportPhraseDto.class);
         return ResponseEntity.status(200).body(supportPhraseDto);
     }
 
     @PostMapping("/support")
-    public ResponseEntity<Void> addSupport(@RequestBody SupportPhraseDto phraseDto) throws IOException {
+    public ResponseEntity<Void> addSupport(@RequestBody SupportPhraseDto phraseDto) {
         supportService.addSupportPhrase(phraseDto);
         return ResponseEntity.status(200).build();
     }

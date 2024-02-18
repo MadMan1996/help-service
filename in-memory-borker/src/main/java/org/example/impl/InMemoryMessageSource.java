@@ -32,13 +32,14 @@ public class  InMemoryMessageSource implements EventSource {
     }
 
 
-
     @Override
     public void publishEvent(ListenerContainer listenerContainer) {
         eventsByType.forEach((type, events) -> {
-            Object event = events.poll();
-            if (event != null) {
-                listenerContainer.notifyListeners(event, type);
+            if (listenerContainer.hasActiveListeners(type)) {
+                Object event = events.poll();
+                if (event != null) {
+                    listenerContainer.notifyListeners(event, type);
+                }
             }
         });
     }

@@ -43,8 +43,8 @@ public class InMemoryEventBroker implements EventBroker {
     @Override
     public boolean stop() throws BrokerIsAlreadyStopped {
         if (isRunning.get()) {
-            List<Runnable> runnables = executor.shutdownNow();
-            isRunning.compareAndExchange(true,false);
+            executor.shutdownNow();
+            isRunning.compareAndExchange(true, false);
             return true;
         }
         throw new BrokerIsAlreadyStopped();

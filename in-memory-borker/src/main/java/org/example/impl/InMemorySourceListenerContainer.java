@@ -65,6 +65,11 @@ public class InMemorySourceListenerContainer implements ListenerContainer {
     }
 
 
+    @Override
+    public boolean hasActiveListeners(Class<?> type) {
+        return ! (listenersByEventType.get(type) == null || listenersByEventType.get(type).isEmpty());
+    }
+
     private List<HandlerMethod> getCurrentHandlers(Class<?> type) {
         List<HandlerMethod> handlerMethods = listenersByEventType.get(type);
         if (handlerMethods == null) {

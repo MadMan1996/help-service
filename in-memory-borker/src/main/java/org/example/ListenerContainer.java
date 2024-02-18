@@ -12,5 +12,6 @@ public interface ListenerContainer {
     boolean remove(List<HandlerMethod> handlerMethod, Class<?> type);
 
     void notifyListeners(Object event, Class<?> type);
+    boolean hasActiveListeners(Class<?> type);
 
 }

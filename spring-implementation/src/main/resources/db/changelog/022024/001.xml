@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="Bogdanenko Maksim" id="001_022024-add_support_phrase_table">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="support_phrase"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="support_phrase">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="phrase" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="002_022024-create_support_phrase_id_sequence" author="Maksim Bogdanenko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="support_phrase_id_seq"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="support_phrase_id_seq" incrementBy="1" startValue="1" />
+    </changeSet>
+</databaseChangeLog>

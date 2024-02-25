@@ -1,4 +1,6 @@
 spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
   datasource:
     url: jdbc:h2:mem:supportdb
     username: admin
@@ -16,3 +18,13 @@ spring:
   h2:
     console:
       enabled: true
+
+kafka:
+  support-service:
+    server: "http://localhost:9092"
+    enabled: true
+    topic: "support_phrase"
+    dlq: "_dlq"
+    backoff:
+      interval: 1
+      max-attempts: 3

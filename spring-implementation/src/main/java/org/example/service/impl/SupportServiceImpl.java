@@ -29,7 +29,7 @@ public class SupportServiceImpl implements SupportService {
     public void addSupportPhrase(SupportPhrase supportPhrase){
         SupportPhrase entity = supportPhraseRepository.save(supportPhrase);
         for(var producer : kafkaTemplates){
-            producer.send(props.getTopic(), supportPhrase);
+            producer.send(props.getTopic(), entity);
         }
     }
 

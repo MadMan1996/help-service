@@ -1,0 +1,30 @@
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+  datasource:
+    url: jdbc:h2:mem:supportdb
+    username: admin
+    password: admin
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    change-log: classpath:/db/changelog/master.xml
+    enabled: true
+    default-schema: public
+  h2:
+    console:
+      enabled: true
+
+kafka:
+  support-service:
+    server: "http://localhost:9092"
+    enabled: true
+    topic: "support_phrase"
+    dlq: "_dlq"
+    backoff:
+      interval: 1
+      max-attempts: 3
